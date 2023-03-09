@@ -18,7 +18,7 @@ public struct CiGitUser: Codable {
 		let values = try decoder.container(keyedBy: StringCodingKey.self)
 		self.displayName = try values.decodeIfPresent(String.self, forKey: "displayName")
     let avatarString = try values.decodeIfPresent(String.self, forKey: "avatarUrl")
-		self.avatarURL = URL(string: avatarString)
+    self.avatarURL = avatarString.flatMap { URL(string: $0 ) }
 	}
 
 	public func encode(to encoder: Encoder) throws {
